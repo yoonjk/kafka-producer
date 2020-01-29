@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kafka-topic-config
+data:
+  kafka-topic-user0: testuser0
+  kafka-topic-user1: testuser1
+  kafka-topic-user2: testuser2
+  kafka-topic-user3: testuser3
+  kafka-topic-user4: testuser4
+  kafka-topic-user5: testuser5
+  kafka-topic-user6: testuser6
+  kafka-topic-user7: testuser7
+  kafka-topic-user8: testuser8
+  kafka-topic-user9: testuser9
+  kafka-topic-user10: testuser10
+  kafka-topic-user11: testuser11
+  kafka-topic-user12: testuser12
+  kafka-topic-user13: testuser13
+  kafka-topic-user14: testuser14
+  kafka-topic-user15: testuser15
+  kafka-topic-user16: testuser16
+  kafka-topic-user17: testuser17
+  kafka-topic-user18: testuser18
+  kafka-topic-user19: testuser19
+  kafka-topic-user20: testuser20
+  kafka-topic-user21: testuser21
+  kafka-topic-user22: testuser22
+  kafka-topic-user23: testuser23
+  kafka-topic-user24: testuser24
+  kafka-topic-user25: testuser25
+  kafka-topic-user26: testuser26
+  kafka-topic-user27: testuser27
+  kafka-topic-user28: testuser28
+  kafka-topic-user29: testuser29
+  kafka-topic-user30: testuser30
