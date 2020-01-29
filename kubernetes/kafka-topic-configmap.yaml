@@ -24,13 +24,3 @@ data:
   kafka-topic-user18: testuser18
   kafka-topic-user19: testuser19
   kafka-topic-user20: testuser20
-  kafka-topic-user21: testuser21
-  kafka-topic-user22: testuser22
-  kafka-topic-user23: testuser23
-  kafka-topic-user24: testuser24
-  kafka-topic-user25: testuser25
-  kafka-topic-user26: testuser26
-  kafka-topic-user27: testuser27
-  kafka-topic-user28: testuser28
-  kafka-topic-user29: testuser29
-  kafka-topic-user30: testuser30
