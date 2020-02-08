@@ -3,7 +3,15 @@ kind: ConfigMap
 metadata:
   name: kafka-topic-config
 data:
+  input-topic: inputuser1
+  output-topic: outputuser1
+  odd-topic: odduser1
+  even-topic: evenuser1
+  company-name: cu
+  default-partitioner: org.apache.kafka.clients.producer.internals.DefaultPartitioner
+  custom-partitioner: com.ibm.lab.partition.CustomPartitioner
   kafka-topic-user0: testuser0
+  kafka-topic-user1: testuser1
   kafka-topic-user1: testuser1
   kafka-topic-user2: testuser2
   kafka-topic-user3: testuser3
@@ -24,3 +32,13 @@ data:
   kafka-topic-user18: testuser18
   kafka-topic-user19: testuser19
   kafka-topic-user20: testuser20
+  kafka-topic-user21: testuser21
+  kafka-topic-user22: testuser22
+  kafka-topic-user23: testuser23
+  kafka-topic-user24: testuser24
+  kafka-topic-user25: testuser25
+  kafka-topic-user26: testuser26
+  kafka-topic-user27: testuser27
+  kafka-topic-user28: testuser28
+  kafka-topic-user29: testuser29
+  kafka-topic-user30: testuser30

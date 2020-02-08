@@ -16,22 +16,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value="/api/producer")
 public class ProducerController {
 	Logger logger = LoggerFactory.getLogger(ProducerController.class);
-
+	
 	@Value("${kafka.topic-name}")
 	private String topicName;
-
+	
 	private final int messagesPerRequest;
-
+	
 	private CountDownLatch latch;
-
+	
+	private String DEFAULT_KEY = "ibm";
+	
 	private final String SUCCCESS = "Send successful";
-
+	
 	private final String NO_MESSAGE = "Please Input Message!";
-
+	
 	private final KafkaTemplate kafkaTemplate;
 
 	public ProducerController(KafkaTemplate kafkaTemplate,
@@ -39,31 +45,68 @@ public class ProducerController {
 		this.kafkaTemplate = kafkaTemplate;
 		this.messagesPerRequest = messagesPerRequest;
 	}
-
-
-	@PutMapping("/partition/{userid}")
-	public ResponseEntity<String> sendUserMessage(@PathVariable(value = "userid") String userid, @RequestBody String message) throws Exception{
+	
+	@PostMapping("/partition")
+	public ResponseEntity<String> sendMessage(@RequestBody String message) throws Exception{
 		logger.info("---------------------------------------");
 		logger.info("Before send message to kafka:"+message);
 		latch = new CountDownLatch(messagesPerRequest);
-
+		
+		
 		if (!StringUtils.isEmpty(message)) {
 	        IntStream.range(0, messagesPerRequest)
-	        	.forEach(i -> this.kafkaTemplate.send(topicName+userid, String.valueOf(i),
-	        			 message + String.valueOf(i))
+	        	.forEach(i -> this.kafkaTemplate.send(topicName, message,
+	        			 message + i)
 	        );
-
-			logger.info("Send successful:"+message);
+		
+	        logger.info("Send successful:"+message);
 		}
 		return ResponseEntity.ok(SUCCCESS);
 	}
+	
+	
+	
+	@ApiOperation(value = "사용가 생성한 topic에 message를 Put.")
+	@PutMapping("/partition/{userid}")
+	public ResponseEntity<String> sendUserMessage(@PathVariable(value = "userid") String userId, @RequestBody String message) throws Exception{
+		logger.info("---------------------------------------");
+		logger.info("Before send message to kafka:"+message);
+		latch = new CountDownLatch(messagesPerRequest);
+		
+		if (!StringUtils.isEmpty(userId) && !StringUtils.isEmpty(message)) {
+	        IntStream.range(0, messagesPerRequest)
+        	.forEach(i -> this.kafkaTemplate.send(topicName + userId, message,  message + String.valueOf(i))
+        			);
+		} else {
+			return ResponseEntity.ok(NO_MESSAGE);
+		}
+		return ResponseEntity.ok(SUCCCESS);
+	}
+	
+	
+	@PostMapping("/round-robin")
+	public ResponseEntity<String> sendRoundRobinMessage(@RequestBody String message) throws Exception{
+		logger.info("---------------------------------------");
+		logger.info("Send message to kafka:"+message);
+		latch = new CountDownLatch(messagesPerRequest);
+		
+		if (!StringUtils.isEmpty(message)) {
+	        IntStream.range(0, messagesPerRequest)
+        	.forEach(i -> this.kafkaTemplate.send(topicName, message + String.valueOf(i))
+        			);
+		} else {
+			return ResponseEntity.ok(NO_MESSAGE);
+		}
 
+		return ResponseEntity.ok(SUCCCESS);
+	}
+	
 	@PutMapping("/round-robin/{userid}")
 	public ResponseEntity<String> sendRoundRobinUserMessage(@PathVariable(value = "userid") String userId, @RequestBody String message) throws Exception{
 		logger.info("---------------------------------------");
 		logger.info("Send message to kafka:"+message);
 		latch = new CountDownLatch(messagesPerRequest);
-
+		
 		if (!StringUtils.isEmpty(userId) && !StringUtils.isEmpty(message)) {
 	        IntStream.range(0, messagesPerRequest)
         	.forEach(i -> this.kafkaTemplate.send(topicName + userId, message + String.valueOf(i))
@@ -73,5 +116,5 @@ public class ProducerController {
 		}
 
 		return ResponseEntity.ok(SUCCCESS);
-	}
+	}	
 }

@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: producer
-        image: nexweb1/kafka-producer:22
+        image: nexweb1/kafka-producer:50
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8060
@@ -32,7 +32,16 @@ spec:
             configMapKeyRef:
               name: kafka-config
               key: kafka-broker-port
-
+        - name: KEY_SERIALIZER
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-config
+              key: key-string-serializer
+        - name: VALUE_SERIALIZER
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-config
+              key: value-string-serializer
         - name: TOPIC_NAME
           valueFrom:
             configMapKeyRef:
@@ -43,3 +52,13 @@ spec:
             configMapKeyRef:
               name: kafka-config
               key: message-per-request
+        - name: PARTITIONER
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-topic-config
+              key: custom-partitioner
+        - name: COMPANY_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-topic-config
+              key: company-name
