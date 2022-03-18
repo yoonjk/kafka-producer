@@ -10,17 +10,16 @@ data:
   company-name: cu
   default-partitioner: org.apache.kafka.clients.producer.internals.DefaultPartitioner
   custom-partitioner: com.ibm.lab.partition.CustomPartitioner
-  kafka-topic-user0: testuser0
-  kafka-topic-user1: testuser1
-  kafka-topic-user1: testuser1
-  kafka-topic-user2: testuser2
-  kafka-topic-user3: testuser3
-  kafka-topic-user4: testuser4
-  kafka-topic-user5: testuser5
-  kafka-topic-user6: testuser6
-  kafka-topic-user7: testuser7
-  kafka-topic-user8: testuser8
-  kafka-topic-user9: testuser9
+  kafka-topic-user00: testuser00
+  kafka-topic-user01: testuser01
+  kafka-topic-user02: testuser02
+  kafka-topic-user03: testuser03
+  kafka-topic-user04: testuser04
+  kafka-topic-user05: testuser05
+  kafka-topic-user06: testuser06
+  kafka-topic-user07: testuser07
+  kafka-topic-user08: testuser08
+  kafka-topic-user09: testuser09
   kafka-topic-user10: testuser10
   kafka-topic-user11: testuser11
   kafka-topic-user12: testuser12

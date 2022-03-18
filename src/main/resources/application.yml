@@ -3,16 +3,16 @@ server:
 spring:
   kafka:
     producer:
-      bootstrap-servers: ${KAFKA_BROKER}:${KAFKA_BROKER_PORT}
-      key-serializer: ${KEY_SERIALIZER}  
-      value-serializer: ${VALUE_SERIALIZER}
-      properties:
-        partitioner.class: ${PARTITIONER}
-        lab.company: ${COMPANY_NAME}
+      bootstrap-servers: ${KAFKA_BROKER:localhost}:${KAFKA_BROKER_PORT:9092}
+      key-serializer: ${KEY_SERIALIZER:org.apache.kafka.common.serialization.StringSerializer}  
+      value-serializer: ${VALUE_SERIALIZER:org.apache.kafka.common.serialization.StringSerializer}
+#      properties:
+#        partitioner.class: ${PARTITIONER}
+#        lab.company: ${COMPANY_NAME}
 
 kafka:
-  topic-name: ${TOPIC_NAME}
-  message-per-request: ${MESSAGE_PER_REQUEST}
+  topic-name: ${TOPIC_NAME:test}
+  message-per-request: ${MESSAGE_PER_REQUEST:10}
   
 logging:
   level:

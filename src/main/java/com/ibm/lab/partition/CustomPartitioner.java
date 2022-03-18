@@ -9,18 +9,18 @@ import org.apache.kafka.common.PartitionInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CustomPartitioner extends DefaultPartitioner {
+public class CustomPartitioner  {
 
 	Logger logger = LoggerFactory.getLogger(CustomPartitioner.class);
 
 	private String companyName;
 	
-	@Override
+
 	public void configure(Map<String, ?> configs) {
 		companyName = configs.get("lab.company").toString();
 	}
 
-	@Override
+
 	public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
         List<PartitionInfo> partitions = cluster.partitionsForTopic(topic);
         int numPartitions = partitions.size();
@@ -37,6 +37,6 @@ public class CustomPartitioner extends DefaultPartitioner {
           } 
         } 
         
-        return super.partition(topic, key, keyBytes, value, valueBytes, cluster);
+        return 1;//super.partition(topic, key, keyBytes, value, valueBytes, cluster);
 	}
 }

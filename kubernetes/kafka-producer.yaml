@@ -17,8 +17,8 @@ spec:
     spec:
       containers:
       - name: producer
-        image: nexweb1/kafka-producer:50
-        imagePullPolicy: IfNotPresent
+        image: nexweb1/kafka-producer:dev # 50 -> dev
+        imagePullPolicy: Always
         ports:
         - containerPort: 8060
         env:
