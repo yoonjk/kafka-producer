@@ -46,7 +46,7 @@ public class ProducerController {
 		this.messagesPerRequest = messagesPerRequest;
 	}
 	
-	@ApiOperation(value = "key값에 따라 특정 Partition으로 message를 전송")
+	@ApiOperation(value = "message를 key값에 따라 특정 Partition으로 전송")
 	@PostMapping("/partition/{userid}/{key}")
 	public ResponseEntity<String> sendUserMessage(@PathVariable(value = "userid") String userId, @PathVariable(value="key") String key, @RequestBody String message) throws Exception{
 		logger.info("---------------------------------------");
@@ -63,7 +63,7 @@ public class ProducerController {
 		return ResponseEntity.ok(SUCCCESS);
 	}	
 	
-	@ApiOperation(value = "round robin 방식으로 message를 전송")
+	@ApiOperation(value = "message를 round robin 방식으로 전송")
 	@PostMapping("/round-robin/{userid}")
 	public ResponseEntity<String> sendRoundRobinUserMessage(@PathVariable(value = "userid") String userId, @RequestBody String message) throws Exception{
 		logger.info("---------------------------------------");
