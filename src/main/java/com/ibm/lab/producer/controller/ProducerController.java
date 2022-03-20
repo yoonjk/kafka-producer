@@ -46,11 +46,11 @@ public class ProducerController {
 		this.messagesPerRequest = messagesPerRequest;
 	}
 	
-	@ApiOperation(value = "사용가 생성한 topic에 key값에 따라 특정 Partition으로 message를 전")
+	@ApiOperation(value = "key값에 따라 특정 Partition으로 message를 전송")
 	@PostMapping("/partition/{userid}/{key}")
 	public ResponseEntity<String> sendUserMessage(@PathVariable(value = "userid") String userId, @PathVariable(value="key") String key, @RequestBody String message) throws Exception{
 		logger.info("---------------------------------------");
-		logger.info("Before send message to kafka:"+message);
+		logger.info("Send message to kafka:"+message);
 		latch = new CountDownLatch(messagesPerRequest);
 		
 		if (!StringUtils.isEmpty(userId) && !StringUtils.isEmpty(message)) {
@@ -63,7 +63,7 @@ public class ProducerController {
 		return ResponseEntity.ok(SUCCCESS);
 	}	
 	
-	@ApiOperation(value = "사용가 생성한 topic에 round robin 방식으로 message를 전")
+	@ApiOperation(value = "round robin 방식으로 message를 전송")
 	@PostMapping("/round-robin/{userid}")
 	public ResponseEntity<String> sendRoundRobinUserMessage(@PathVariable(value = "userid") String userId, @RequestBody String message) throws Exception{
 		logger.info("---------------------------------------");
