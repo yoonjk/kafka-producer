@@ -1,3 +1,15 @@
+#eclipse
+target/*
+.classpath
+.project
+.factorypath
+.mvn/*
+.settings/*
+target/*
+bin/*
+.project
+.classpath
+
 # Compiled class file
 *.class
 
