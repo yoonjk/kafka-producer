@@ -54,9 +54,7 @@ public class ProducerController {
 		latch = new CountDownLatch(messagesPerRequest);
 		
 		if (!StringUtils.isEmpty(userId) && !StringUtils.isEmpty(message)) {
-	        IntStream.range(0, messagesPerRequest)
-        	.forEach(i -> this.kafkaTemplate.send(topicName + userId, key,  message + String.valueOf(i))
-        			);
+        	kafkaTemplate.send(topicName + userId, key,  message);
 		} else {
 			return ResponseEntity.ok(NO_MESSAGE);
 		}
