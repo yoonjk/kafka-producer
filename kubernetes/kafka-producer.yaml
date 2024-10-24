@@ -62,3 +62,8 @@ spec:
             configMapKeyRef:
               name: kafka-topic-config
               key: company-name
+        - name: COMPRESS_TYPE
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-topic-config
+              key: compress
