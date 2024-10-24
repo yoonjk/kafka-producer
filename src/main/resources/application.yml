@@ -6,12 +6,13 @@ spring:
       bootstrap-servers: ${KAFKA_BROKER:localhost}:${KAFKA_BROKER_PORT:9092}
       key-serializer: ${KEY_SERIALIZER:org.apache.kafka.common.serialization.StringSerializer}  
       value-serializer: ${VALUE_SERIALIZER:org.apache.kafka.common.serialization.StringSerializer}
-#      properties:
-#        partitioner.class: ${PARTITIONER}
-#        lab.company: ${COMPANY_NAME}
+      properties:
+        partitioner.class: ${PARTITIONER}
+        lab.company: ${COMPANY_NAME}
 
 kafka:
   topic-name: ${TOPIC_NAME:test}
+  compress: ${COMPRESS_TYPE:snappy}
   message-per-request: ${MESSAGE_PER_REQUEST:10}
   
 logging:

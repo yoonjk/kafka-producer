@@ -9,7 +9,7 @@ import org.apache.kafka.common.PartitionInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CustomPartitioner  {
+public class CustomPartitioner extends DefaultPartitioner  {
 
 	Logger logger = LoggerFactory.getLogger(CustomPartitioner.class);
 
@@ -37,6 +37,6 @@ public class CustomPartitioner  {
           } 
         } 
         
-        return 1;//super.partition(topic, key, keyBytes, value, valueBytes, cluster);
+        return super.partition(topic, key, keyBytes, value, valueBytes, cluster);
 	}
 }
