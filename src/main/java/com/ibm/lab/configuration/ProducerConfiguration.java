@@ -15,7 +15,7 @@ import org.springframework.kafka.core.ProducerFactory;
 @Configuration
 public class ProducerConfiguration {
 	
-	@Value("{spring.kafka.producer.bootstrap-servers}")
+	@Value("${spring.kafka.producer.bootstrap-servers}")
 	private String brokers;
 	
 	@Value("${kafka.compress}")
