@@ -18,7 +18,7 @@ public class ProducerConfiguration {
 	@Value("{spring.kafka.producer.bootstrap-servers}")
 	private String brokers;
 	
-	@Value("{kafka.compress}")
+	@Value("${kafka.compress}")
 	private String compress;
 	
     @Bean
