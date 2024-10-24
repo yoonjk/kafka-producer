@@ -1,0 +1,10 @@
+KAFKA_BROKER=10.117.25.140
+KAFKA_BROKER_PORT=9092
+KEY_SERIALIZER=org.apache.kafka.common.serialization.StringSerializer
+VALUE_SERIALIZER=org.apache.kafka.common.serialization.StringSerializer
+PARTITIONER=org.apache.kafka.clients.producer.internals.DefaultPartitioner
+#PARTITIONER=com.ibm.lab.partition.CustomPartitioner
+COMPANY_NAME=ibm
+TOPIC_NAME=test
+COMPRESS_TYPE=snappy
+MESSAGE_PER_REQUEST=10
