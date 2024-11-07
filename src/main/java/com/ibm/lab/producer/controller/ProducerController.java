@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.util.StringUtils;
+import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -54,7 +56,10 @@ public class ProducerController {
 		latch = new CountDownLatch(messagesPerRequest);
 		
 		if (!StringUtils.isEmpty(userId) && !StringUtils.isEmpty(message)) {
-        	kafkaTemplate.send(topicName + userId, key,  message);
+			ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topicName + userId, key,  message);
+			future.addCallback(
+					successCallback -> logger.info("success:{}", successCallback.getRecordMetadata()), 
+					failCallback-> logger.info("failure:{}", failCallback.getMessage()));
 		} else {
 			return ResponseEntity.ok(NO_MESSAGE);
 		}
@@ -69,7 +74,10 @@ public class ProducerController {
 		latch = new CountDownLatch(messagesPerRequest);
 		
 		if (!StringUtils.isEmpty(userId) && !StringUtils.isEmpty(message)) {
-	        kafkaTemplate.send(topicName + userId, message);
+			ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topicName + userId, message);
+			future.addCallback(
+					successCallback -> logger.info("success:{}", successCallback.getRecordMetadata()), 
+					failCallback-> logger.info("failure:{}", failCallback.getMessage()));
 		} else {
 			return ResponseEntity.ok(NO_MESSAGE);
 		}
