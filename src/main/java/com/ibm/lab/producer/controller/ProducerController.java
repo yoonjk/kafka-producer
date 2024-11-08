@@ -76,7 +76,7 @@ public class ProducerController {
 		if (!StringUtils.isEmpty(userId) && !StringUtils.isEmpty(message)) {
 			ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topicName + userId, message);
 			future.addCallback(
-					successCallback -> logger.info("success:{}", successCallback.getRecordMetadata()), 
+					successCallback -> logger.info("success: partition:{}, offset:{}", successCallback.getRecordMetadata().partition(), successCallback.getRecordMetadata().offset()), 
 					failCallback-> logger.info("failure:{}", failCallback.getMessage()));
 		} else {
 			return ResponseEntity.ok(NO_MESSAGE);
