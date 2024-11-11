@@ -29,6 +29,19 @@ spec:
       labels:
         app: kafka-consumer
     spec:
+      hostAliases:
+        - ip: "10.117.25.140"
+          hostnames:
+          - "kafka1"
+          - "zookeeper1"
+        - ip: "10.117.25.151"
+          hostnames:
+          - "kafka2"
+          - "zookeeper2"
+        - ip: "10.66.219.170"
+          hostnames:
+          - "kafka3"
+          - "zookeeper3"    
       containers:
       - name: consumer
         image: nexweb1/kafka-consumer:a28
